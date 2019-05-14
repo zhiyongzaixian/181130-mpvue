@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/firstView/main",
-    "pages/books/main"
+    "pages/books/main",
+    "pages/booksList/main",
+    "pages/firstView/main"
   ],
   "window": {
     "backgroundTextStyle":"light",
