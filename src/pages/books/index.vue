@@ -1,6 +1,6 @@
 <template>
   <div>
-    index组件。。。
+    books组件。。。
   </div>
 </template>
 
