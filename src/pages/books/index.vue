@@ -20,7 +20,7 @@
         <span @click="toList(booksArr)" class="more"> > </span>
       </div>
       <ul class="list_content">
-        <li v-for="(item, index) in booksArr" :key="index">
+        <li @click="toDetail(item)" v-for="(item, index) in booksArr" :key="index">
           <img :src="item.image" alt="">
           <p>《{{item.title}}》</p>
           <p>{{item.author}}</p>
@@ -46,6 +46,12 @@
       toList(booksArr){
         wx.navigateTo({
           url: '/pages/booksList/main?booksList=' + JSON.stringify(booksArr)
+        })
+      },
+      toDetail(bookItem){
+        console.log(typeof bookItem, bookItem);
+        wx.navigateTo({
+          url: '/pages/detail/main?bookItem=' + JSON.stringify(bookItem)
         })
       }
     }
