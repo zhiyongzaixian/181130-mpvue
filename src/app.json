@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/personal/main",
     "pages/search/main",
     "pages/books/main",
     "pages/booksList/main",
-    "pages/personal/main",
     "pages/detail/main",
     "pages/firstView/main"
   ],

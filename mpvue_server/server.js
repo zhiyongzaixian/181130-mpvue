@@ -2,6 +2,11 @@ let Koa = require('koa');
 let KoaRouter = require('koa-router');
 
 
+// 浏览器和React Native
+let Fly=require("flyio/src/node")
+let fly=new Fly;
+
+
 // 生成应用
 const app = new Koa();
 // 生成路由器
@@ -26,6 +31,28 @@ router.get('/searchBooks', (ctx, next) => {
   
   // 3. 返回处理数据
   ctx.body = datas;
+})
+
+
+router.get('/getOpenId', async (ctx, next) => {
+  // 1. 获取请求参数
+  let code = ctx.query.code;
+  let appId = 'wx810e8b1fde386fde';
+  let appSecret = '99d253e9b94a4a7eaf116fe77995dd5e';
+  
+  let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${appSecret}&js_code=${code}&grant_type=authorization_code`
+  // 发送请求
+  // fly.get(url) // 返回值就是promise
+  //   .then(function (response) {
+  //     console.log(response.data);
+  //
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  let result = await fly.get(url) // 返回值就是promise
+  console.log(typeof result.data);
+  ctx.body = JSON.parse(result.data).openid;
 })
 
 
