@@ -4,6 +4,12 @@
       <img class="avatar" :src="userInfo.avatarUrl?userInfo.avatarUrl:'/static/imgs/personal/personal.png'" alt="">
       <button @getuserinfo="handleGetUserInfo" open-type="getUserInfo" class="btn">{{userInfo.nickName?userInfo.nickName:'登录'}}</button>
     </div>
+    <div class="cardList">
+      <div @click="handleScan" class="card">
+        <span>扫码看书</span>
+        <span class="more"> > </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,6 +33,14 @@
         if(res.mp.detail.userInfo){
           this.userInfo = res.mp.detail.userInfo
         }
+      },
+      handleScan(){
+        wx.scanCode({
+          success: (res) => {
+            console.log('扫码成功：', res);
+            console.log('图书isbn码：', res.result); //9787010009148
+          }
+        })
       }
     }
   }
@@ -52,4 +66,16 @@
         vertical-align middle
         background rgba(255,255,255,.6)
 
+    .cardList
+      .card
+        width 90%
+        height 60rpx
+        padding 10rpx
+        line-height 60rpx
+        font-size 28rpx
+        margin 0 auto
+        border 1rpx solid #eee
+        margin-top 20rpx
+        .more
+          float right
 </style>
