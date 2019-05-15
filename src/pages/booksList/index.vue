@@ -16,6 +16,7 @@
 
 <script>
   export default {
+    props: ['booksList'],
 //    onLoad(options){
 //      console.log(options);
 //    }

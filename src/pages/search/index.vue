@@ -1,23 +1,39 @@
 <template>
   <div id="searchContainer">
     <div class="header">
-      <input v-model="searchContent" type="text" placeholder="书中自有黄金屋">
-      <span @click="test" class="clean" v-show="searchContent"> X </span>
+      <input @confirm="handleConfirm" v-model="searchContent" type="text" placeholder="书中自有黄金屋">
+      <span @click="clean" class="clean" v-show="searchContent"> X </span>
     </div>
+    <!--列表展示-->
+    <BooksList :booksList="booksList"/>
   </div>
 </template>
 
 <script>
+  import BooksList from '../booksList/index.vue'
+  import request from '../../utils/request'
   export default {
+    components: {
+      BooksList
+    },
     data(){
       return {
-        searchContent: ''
+        searchContent: '',
+        booksList: []
       }
     },
     methods: {
-      test(){
-        console.log('xxx');
+      clean(){
         this.searchContent = ''
+        this.booksList = []
+      },
+      async handleConfirm(){
+        console.log('xx');
+        // 获取用户输入的关键字
+        let searchContent = this.searchContent
+        // 发送请求
+        let result = await request('/searchBooks', {req: searchContent});
+        this.booksList = result.data
       }
     }
   }
